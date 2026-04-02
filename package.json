@@ -6,12 +6,20 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "scout": "tsx scripts/run-scout.ts",
+    "portal-scout": "tsx scripts/run-portal-scout.ts",
+    "migrate": "tsx scripts/apply-migration.ts"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.101.1",
+    "dotenv": "^17.4.0",
     "next": "16.2.2",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "tsx": "^4.21.0",
+    "pg": "^8.11.0",
+    "pdf-parse": "^1.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
