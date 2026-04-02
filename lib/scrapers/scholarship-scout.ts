@@ -74,7 +74,7 @@ export async function scoutScholarships(opts?: { insertToDb?: boolean }) {
   if (opts?.insertToDb && typeof supabaseAdmin !== 'undefined' && supabaseAdmin) {
     try {
       const payload = unique.map(u => ({ title: u.title, deadline: u.deadline, source_url: u.link, category: 'local', status: 'active' }));
-      const { error } = await supabaseAdmin.from('scholarships').upsert(payload, { onConflict: ['source_url'] });
+      const { error } = await supabaseAdmin.from('scholarships').upsert(payload, { onConflict: 'source_url' });
       if (error) console.error('[ERROR] DB insert failed', error);
     } catch (err) {
       console.error('[ERROR] supabase insert threw', err);

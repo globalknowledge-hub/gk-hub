@@ -76,6 +76,11 @@ async function main() {
 
     console.log('[FOUND] Academic Calendar link:', found.link, 'text:', found.text);
 
+    if (!found.link) {
+      console.error('[ERROR] found.link is undefined');
+      process.exit(1);
+    }
+
     const text = await jinaRead(found.link);
     if (!text) {
       console.error('[ERROR] jina could not read the academic calendar');
@@ -89,8 +94,8 @@ async function main() {
     console.log('[SAVED] Jina-extracted text saved to', outPath);
 
     // Show lines containing April 10 or result keywords
-    const lines = text.split(/\n+/).map(l => l.trim()).filter(Boolean);
-    const matches = lines.filter(l => /10\s*April|April\s*10|10\/04\/2026|result|declar|declare|result\s+date/i.test(l));
+    const lines = text.split(/\n+/).map((l: string) => l.trim()).filter(Boolean) as string[];
+    const matches = lines.filter((l: string) => /10\s*April|April\s*10|10\/04\/2026|result|declar|declare|result\s+date/i.test(l));
     console.log('[MATCHES] Relevant lines:');
     console.log(matches.slice(0, 30).join('\n'));
   } catch (err) {

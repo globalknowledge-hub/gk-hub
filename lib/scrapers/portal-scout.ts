@@ -96,7 +96,7 @@ export async function portalScout() {
       if (jina && jina.text) {
         const t = jina.text;
         // find candidate lines that look like notifications and include dates
-        const lines = t.split(/\n+/).map(l => l.trim()).filter(Boolean);
+        const lines = t.split(/\n+/).map((l: string) => l.trim()).filter(Boolean);
         const dateRe = /\b(?:10(?:th)?\s+April|April\s+10(?:th)?|10\/04\/2026|10-04-2026)\b/i;
         for (const line of lines) {
           if (dateRe.test(line) || /notification|result|notice|announcement/i.test(line)) {

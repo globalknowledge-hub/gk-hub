@@ -24,8 +24,8 @@ async function main() {
     fs.writeFileSync(outPath, text, 'utf8');
     console.log('[SAVED] Extracted PDF text to', outPath);
 
-    const lines = text.split(/\n+/).map(l => l.trim()).filter(Boolean);
-    const matches = lines.filter(l => /10\s*April|April\s*10|10\/04\/2026|HSLC|High\s*School|Result|declare|declar|result\s+date/i.test(l));
+    const lines = text.split(/\n+/).map((l: string) => l.trim()).filter(Boolean) as string[];
+    const matches = lines.filter((l: string) => /10\s*April|April\s*10|10\/04\/2026|HSLC|High\s*School|Result|declare|declar|result\s+date/i.test(l));
     console.log('[MATCHES] Relevant lines (first 40):');
     console.log(matches.slice(0, 40).join('\n'));
   } catch (err) {

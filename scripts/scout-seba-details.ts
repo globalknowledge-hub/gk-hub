@@ -38,7 +38,7 @@ async function main() {
         const txt = await jinaRead(u);
         if (!txt) continue;
         // look for April 10 or 'Result' keywords
-        const lines = txt.split(/\n+/).map(l => l.trim()).filter(Boolean);
+        const lines = txt.split(/\n+/).map((l: string) => l.trim()).filter(Boolean);
         const match = lines.find(l => /10\s*April|April\s*10|HSLC|Result|result|declare|declar/i.test(l));
         results.push({ link: u, excerpt: match || lines.slice(0,3).join(' | ') });
       } catch (err) {

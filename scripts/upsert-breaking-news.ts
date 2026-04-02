@@ -49,11 +49,11 @@ How to check: 1) Visit any official link above; 2) Click the 'Results' or 'Notif
       importance_score: 10,
     };
 
-    const { data: d1, error: e1 } = await supabaseAdmin.from('news_articles').upsert(payloadEn, { onConflict: ['slug'] });
+    const { data: d1, error: e1 } = await supabaseAdmin.from('news_articles').upsert(payloadEn, { onConflict: 'slug' });
     if (e1) console.error('[ERROR] upsert en failed', e1);
     else console.log('[SUCCESS] Upserted EN article', d1);
 
-    const { data: d2, error: e2 } = await supabaseAdmin.from('news_articles').upsert(payloadAs, { onConflict: ['slug'] });
+    const { data: d2, error: e2 } = await supabaseAdmin.from('news_articles').upsert(payloadAs, { onConflict: 'slug' });
     if (e2) console.error('[ERROR] upsert as failed', e2);
     else console.log('[SUCCESS] Upserted AS article', d2);
   } catch (err) {
