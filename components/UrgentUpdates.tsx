@@ -40,9 +40,9 @@ export default async function UrgentUpdates() {
     : '📰 No urgent updates at this time';
 
   return (
-    <div className="w-full bg-gradient-to-r from-red-50 to-orange-50 border-b border-red-200">
-      <div className="max-w-full px-4 py-3 overflow-hidden">
-        <div className="ticker-marquee text-sm font-semibold text-red-700 whitespace-nowrap">
+    <div className="w-full bg-black text-white">
+      <div className="max-w-full px-6 py-2 overflow-hidden">
+        <div className="ticker-marquee text-sm font-semibold text-white whitespace-nowrap">
           {tickerText}
         </div>
       </div>

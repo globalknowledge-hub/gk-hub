@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import UrgentUpdates from '../../components/UrgentUpdates';
 import ModeToggle from '../../components/ModeToggle';
+import LanguageSelector from '../../components/LanguageSelector';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -29,19 +30,18 @@ export default async function RootLayout({
       lang="en"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased scroll-smooth`}
     >
-      <body className="min-h-screen flex flex-col bg-white text-gray-900">
+      <body className="min-h-screen flex flex-col bg-white text-zinc-900 m-0 p-0">
         {/* Header */}
-        <header className="sticky top-0 z-50 bg-white border-b border-gray-200 shadow-sm">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <a 
-                href="/" 
-                className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent hover:opacity-80 transition-opacity"
-              >
-                Global Education Hub
-              </a>
-            </div>
-            <div className="flex items-center gap-4">
+        <header className="sticky top-0 z-50 bg-white border-b-2 border-black">
+          <div className="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+            <a 
+              href="/" 
+              className="font-serif text-2xl font-black uppercase tracking-tighter text-black hover:underline"
+            >
+              Global Education Hub
+            </a>
+            <div className="flex items-center gap-6">
+              <LanguageSelector />
               <ModeToggle />
             </div>
           </div>
@@ -56,10 +56,9 @@ export default async function RootLayout({
         </div>
 
         {/* Footer */}
-        <footer className="border-t border-gray-200 bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
-          <div className="max-w-7xl mx-auto text-center text-sm text-gray-600">
+        <footer className="border-t-2 border-black bg-white py-6 px-4 sm:px-6 lg:px-8">
+          <div className="max-w-7xl mx-auto text-center text-xs text-zinc-600">
             <p>© 2026 Global Education Hub. All rights reserved.</p>
-            <p className="mt-2">Bringing you the latest in education, scholarships, and career news.</p>
           </div>
         </footer>
       </body>

@@ -1,27 +1,57 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ===== FONT IMPORTS ===== */
+/* Google Fonts for Indic script support */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&family=Noto+Sans+Devanagari:wght@400;700&family=Noto+Sans+Assamese:wght@400;700&family=Merriweather:ital,wght@0,400;0,700;0,900;1,400&family=Georgia:ital,wght@0,400;0,700;1,400&display=swap');
 
-@theme {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
-
-/* Base body styles */
+/* ===== GLOBAL RESET ===== */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: system-ui, -apple-system, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #ffffff;
+  color: #18181b;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans', sans-serif;
+  line-height: 1.6;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== LANGUAGE-SPECIFIC FONT STACKS ===== */
+/* Assamese text rendering */
+.lang-as,
+[lang="as"] {
+  font-family: 'Noto Sans Assamese', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.7;
+}
+
+/* Bengali text rendering */
+.lang-bn,
+[lang="bn"] {
+  font-family: 'Noto Sans Bengali', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.7;
+}
+
+/* Hindi/Devanagari text rendering */
+.lang-hi,
+[lang="hi"] {
+  font-family: 'Noto Sans Devanagari', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  line-height: 1.7;
+}
+
+/* English - serif for editorial */
+.lang-en,
+[lang="en"] {
+  font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* ===== SERIF FONT CLASS ===== */
+.font-serif {
+  font-family: 'Merriweather', Georgia, 'Times New Roman', serif;
+  letter-spacing: -0.01em;
 }
 
 /* Marquee animation for ticker */
@@ -35,52 +65,157 @@ body {
 }
 
 .ticker-marquee {
-  animation: marquee 30s linear infinite;
+  animation: marquee 50s linear infinite;
 }
 
 .ticker-marquee:hover {
   animation-play-state: paused;
 }
 
-/* E-Ink reader mode - applies to entire document */
+/* ===== E-INK READER MODE (Full Implementation) ===== */
 body.reader-eink {
-  background: #f4f1ea !important;
-  color: #1a1a1a !important;
-  font-family: Georgia, 'Times New Roman', serif !important;
+  background-color: #f4f1ea !important;
+  color: #000000 !important;
+  font-family: 'Georgia', 'Times New Roman', serif !important;
   line-height: 1.8 !important;
 }
 
+/* Reset all backgrounds to E-Ink cream */
 body.reader-eink * {
-  color: #1a1a1a !important;
-}
-
-body.reader-eink a {
-  color: #000080 !important;
-  text-decoration: underline;
-}
-
-body.reader-eink button,
-body.reader-eink select {
-  background: #ffffff !important;
+  background-color: #f4f1ea !important;
   color: #000000 !important;
-  border: 1px solid #000000 !important;
 }
 
+/* Typography in E-Ink mode */
+body.reader-eink h1,
+body.reader-eink h2,
+body.reader-eink h3,
+body.reader-eink h4,
+body.reader-eink h5,
+body.reader-eink h6,
+body.reader-eink p,
+body.reader-eink span,
+body.reader-eink div,
+body.reader-eink article,
+body.reader-eink main,
+body.reader-eink section {
+  color: #000000 !important;
+  font-family: 'Georgia', 'Times New Roman', serif !important;
+  background-color: #f4f1ea !important;
+}
+
+/* Links: underlined and black */
+body.reader-eink a {
+  color: #000000 !important;
+  text-decoration: underline !important;
+  border-bottom: 1px solid currentColor !important;
+}
+
+body.reader-eink a:visited {
+  color: #333333 !important;
+}
+
+/* Form elements */
+body.reader-eink button,
+body.reader-eink select,
+body.reader-eink input,
+body.reader-eink textarea {
+  background: white !important;
+  color: #000000 !important;
+  border: 2px solid #000000 !important;
+  font-family: 'Georgia', serif !important;
+  padding: 8px 12px !important;
+}
+
+body.reader-eink button:hover,
+body.reader-eink button:active {
+  background: #e8e5dc !important;
+}
+
+/* Headers and footers */
 body.reader-eink header,
-body.reader-eink nav,
 body.reader-eink footer {
   background: #e8e5dc !important;
-  border-color: #8b8b8b !important;
+  border-color: #000000 !important;
+  border-width: 2px !important;
 }
 
+/* Sections and articles */
 body.reader-eink article,
-body.reader-eink .card {
+body.reader-eink main,
+body.reader-eink section {
   background: #f4f1ea !important;
-  border-color: #8b8b8b !important;
 }
 
-/* Remove animations in E-Ink mode */
+/* Borders - all borders become strong black */
+body.reader-eink [class*="border"] {
+  border-color: #000000 !important;
+}
+
+body.reader-eink .border-b,
+body.reader-eink .border-l,
+body.reader-eink .border-t,
+body.reader-eink .border-r,
+body.reader-eink .border {
+  border-color: #000000 !important;
+}
+
+body.reader-eink .border-gray-300,
+body.reader-eink .border-zinc-600,
+body.reader-eink .border-gray-200 {
+  border-color: #000000 !important;
+}
+
+/* Remove shadows */
+body.reader-eink [class*="shadow"] {
+  box-shadow: none !important;
+}
+
+body.reader-eink .shadow,
+body.reader-eink .shadow-md,
+body.reader-eink .shadow-lg {
+  box-shadow: none !important;
+}
+
+/* Remove background colors from special elements */
+body.reader-eink .bg-black,
+body.reader-eink .bg-white,
+body.reader-eink .bg-red-600,
+body.reader-eink .bg-red-700,
+body.reader-eink .bg-zinc-600,
+body.reader-eink .bg-zinc-400,
+body.reader-eink .bg-gray-300 {
+  background-color: #f4f1ea !important;
+  color: #000000 !important;
+  border: 1px solid #000000;
+}
+
+/* Grays become black text on cream bg */
+body.reader-eink .text-zinc-900,
+body.reader-eink .text-zinc-700,
+body.reader-eink .text-zinc-600,
+body.reader-eink .text-gray-400 {
+  color: #000000 !important;
+}
+
+body.reader-eink .text-red-600,
+body.reader-eink .text-red-700 {
+  color: #000000 !important;
+}
+
+/* Animations disabled in E-Ink */
 body.reader-eink .ticker-marquee {
   animation: none !important;
+  transform: translateX(0) !important;
+}
+
+body.reader-eink * {
+  animation: none !important;
+  transition: none !important;
+}
+
+/* Serif enforcement */
+body.reader-eink .font-serif {
+  font-family: 'Georgia', 'Times New Roman', serif !important;
 }
 
