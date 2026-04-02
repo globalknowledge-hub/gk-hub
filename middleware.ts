@@ -4,7 +4,6 @@ export const config = {
   matcher: ['/((?!_next|api|static|.*\\..*).*)'],
 };
 
-export function middleware(req: NextRequest) {
-  // Temporarily disabled to debug routing issues
+export function middleware(_req: NextRequest) {
   return NextResponse.next();
 }
