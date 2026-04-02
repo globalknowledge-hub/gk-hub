@@ -2,9 +2,7 @@ import type { Metadata } from 'next';
 import { Geist, Geist_Mono } from 'next/font/google';
 import './globals.css';
 import UrgentUpdates from '../../components/UrgentUpdates';
-import dynamic from 'next/dynamic';
-
-const ModeToggle = dynamic(() => import('../../components/ModeToggle'), { ssr: false });
+import ModeToggle from '../../components/ModeToggle';
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
