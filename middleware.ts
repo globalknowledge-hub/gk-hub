@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import hubConfig from './hub-master-config.json';
 
-const toggles: string[] = (hubConfig?.project_metadata?.toggles as string[]) || ['en', 'as'];
-const defaultLang: string = (hubConfig?.project_metadata?.primary_language as string) || 'en';
+// NOTE: avoid importing project root JSON in Edge middleware (Turbopack/build can fail).
+// Use constants here; keep in sync with `hub-master-config.json` if needed.
+const toggles: string[] = ['as', 'hi', 'bn', 'en'];
+const defaultLang: string = 'en';
 
 // Apply middleware to root and any non-api/_next paths
 export const config = {
