@@ -5,12 +5,6 @@ export const config = {
 };
 
 export function middleware(req: NextRequest) {
-  const { pathname } = req.nextUrl;
-  
-  // Only redirect the root path
-  if (pathname === '/') {
-    return NextResponse.redirect(new URL('/en', req.url));
-  }
-  
+  // Temporarily disabled to debug routing issues
   return NextResponse.next();
 }
