@@ -5,7 +5,7 @@ export function middleware(_request: NextRequest) {
   return NextResponse.next();
 }
 
-// Only run middleware on specific routes, excluding all static content
+// Explicitly set empty matcher to disable middleware
 export const config = {
-  matcher: ['/((?!.*\\..*|_next|api|static).*)', '/$'],
+  matcher: [],
 };
