@@ -1,7 +1,4 @@
-import dotenv from 'dotenv';
 import { supabaseAdmin } from '../supabase';
-
-dotenv.config({ path: '.env.local' });
 
 const SOURCE_URLS = [
   'https://sebaonline.org/',

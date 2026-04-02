@@ -1,7 +1,5 @@
-import dotenv from 'dotenv';
-import fs from 'fs';
-
-dotenv.config({ path: '.env.local' });
+// Avoid top-level dotenv/fs usage in modules that may be bundled for server/edge.
+// Scripts should load environment variables themselves before invoking these helpers.
 
 const TARGET_URLS = [
   'https://site.sebaonline.org/notifications',
@@ -11,11 +9,15 @@ const TARGET_URLS = [
 
 function getJinaKey() {
   try {
-    const cfg = JSON.parse(fs.readFileSync('hub-master-config.json', 'utf8'));
-    return cfg.data_sources?.jina_key || cfg.credentials?.data_sources?.jina_key || null;
+    if (typeof process !== 'undefined' && process.env.JINA_KEY) return process.env.JINA_KEY;
+    if (typeof process !== 'undefined' && process.env.HUB_MASTER_CONFIG) {
+      const cfg = JSON.parse(process.env.HUB_MASTER_CONFIG);
+      return cfg.data_sources?.jina_key || cfg.credentials?.data_sources?.jina_key || null;
+    }
   } catch (e) {
-    return null;
+    // ignore
   }
+  return null;
 }
 
 async function jinaReadRemote(targetUrl: string) {

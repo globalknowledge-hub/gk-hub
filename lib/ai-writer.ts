@@ -1,5 +1,3 @@
-import fs from 'fs';
-
 type Config = {
   editorial_rules?: {
     prohibited_words?: string[];
@@ -8,13 +6,16 @@ type Config = {
 };
 
 function loadProhibitedWords(): string[] {
+  const defaultWords = ['delve', 'tapestry', 'comprehensive', 'unlock', 'foster'];
   try {
-    const raw = fs.readFileSync('hub-master-config.json', 'utf8');
-    const cfg: Config = JSON.parse(raw);
-    return cfg.editorial_rules?.prohibited_words ?? ['delve', 'tapestry', 'comprehensive', 'unlock', 'foster'];
+    if (typeof process !== 'undefined' && process.env.HUB_MASTER_CONFIG) {
+      const cfg: Config = JSON.parse(process.env.HUB_MASTER_CONFIG);
+      return cfg.editorial_rules?.prohibited_words ?? defaultWords;
+    }
   } catch (err) {
-    return ['delve', 'tapestry', 'comprehensive', 'unlock', 'foster'];
+    // ignore and fall through to defaults
   }
+  return defaultWords;
 }
 
 export function cleanEducationNews(rawText: string) {

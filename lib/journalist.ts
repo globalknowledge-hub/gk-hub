@@ -1,15 +1,15 @@
-import fs from 'fs';
-
 const FORBIDDEN = ['delve','tapestry','comprehensive','unlock','foster','transformative','vibrant'];
 
 function loadForbidden(): string[] {
   try {
-    const raw = fs.readFileSync('hub-master-config.json','utf8');
-    const cfg = JSON.parse(raw);
-    return Array.from(new Set([...(cfg.editorial_rules?.prohibited_words||[]), ...FORBIDDEN]));
+    if (typeof process !== 'undefined' && process.env.HUB_MASTER_CONFIG) {
+      const cfg = JSON.parse(process.env.HUB_MASTER_CONFIG);
+      return Array.from(new Set([...(cfg.editorial_rules?.prohibited_words || []), ...FORBIDDEN]));
+    }
   } catch (err) {
-    return FORBIDDEN;
+    // ignore and fall back to defaults
   }
+  return FORBIDDEN;
 }
 
 function removeForbidden(text: string, forbidden: string[]) {
