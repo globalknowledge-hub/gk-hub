@@ -5,11 +5,9 @@
   --foreground: #171717;
 }
 
-@theme inline {
+@theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -19,20 +17,70 @@
   }
 }
 
+/* Base body styles */
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: system-ui, -apple-system, sans-serif;
 }
 
-/* E-Ink reader mode */
-.reader-eink {
+/* Marquee animation for ticker */
+@keyframes marquee {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+.ticker-marquee {
+  animation: marquee 30s linear infinite;
+}
+
+.ticker-marquee:hover {
+  animation-play-state: paused;
+}
+
+/* E-Ink reader mode - applies to entire document */
+body.reader-eink {
   background: #f4f1ea !important;
-  color: #000000 !important;
+  color: #1a1a1a !important;
   font-family: Georgia, 'Times New Roman', serif !important;
   line-height: 1.8 !important;
 }
 
-/* Ensure links are visible in E-Ink mode */
-.reader-eink a { color: #000000; text-decoration: underline; }
+body.reader-eink * {
+  color: #1a1a1a !important;
+}
+
+body.reader-eink a {
+  color: #000080 !important;
+  text-decoration: underline;
+}
+
+body.reader-eink button,
+body.reader-eink select {
+  background: #ffffff !important;
+  color: #000000 !important;
+  border: 1px solid #000000 !important;
+}
+
+body.reader-eink header,
+body.reader-eink nav,
+body.reader-eink footer {
+  background: #e8e5dc !important;
+  border-color: #8b8b8b !important;
+}
+
+body.reader-eink article,
+body.reader-eink .card {
+  background: #f4f1ea !important;
+  border-color: #8b8b8b !important;
+}
+
+/* Remove animations in E-Ink mode */
+body.reader-eink .ticker-marquee {
+  animation: none !important;
+}
 
