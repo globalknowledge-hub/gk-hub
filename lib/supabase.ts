@@ -1,8 +1,6 @@
-import dotenv from 'dotenv';
 import { createClient } from '@supabase/supabase-js';
 
-dotenv.config({ path: '.env.local' });
-
+// Do NOT call dotenv.config() here — Next loads env vars for server runtime.
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
 const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
 
